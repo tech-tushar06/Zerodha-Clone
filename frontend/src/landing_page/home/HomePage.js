@@ -3,11 +3,8 @@ import Hero from './Hero'
 import Awards from './Awards'
 import Stats from './Stats';
 import Pricing from './Pricing';
-import Education from './Education';
-
-import Navbar from '../../Navbar';
+import Education from './education';
 import OpenAccount from '../../OpenAccount';
-import Footer from '../../Footer';
 
 
 
