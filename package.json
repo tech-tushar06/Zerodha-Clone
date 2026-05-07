@@ -1,0 +1,25 @@
+{
+  "name": "zerodha-clone",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/tech-tushar06/Zerodha-Clone#readme",
+  "bugs": {
+    "url": "https://github.com/tech-tushar06/Zerodha-Clone/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tech-tushar06/Zerodha-Clone.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "axios": "^1.16.0",
+    "chart.js": "^4.5.1",
+    "react-chartjs-2": "^5.3.1"
+  }
+}
