@@ -8,6 +8,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const User = require("./model/User");
+const LoginHistory = require("./model/LoginHistory");
 
 const { HoldingsModel } = require("./model/HoldingsModel");
 
@@ -30,8 +31,29 @@ app.post("/register", async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({ username, email, password: hashedPassword });
     await user.save();
+    
+    // Save signup to login history
+    const ipAddress = req.ip || req.connection.remoteAddress;
+    await LoginHistory.create({
+      username,
+      email,
+      action: "signup",
+      ipAddress,
+      success: true,
+    });
+    
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
+    // Save failed signup attempt
+    const ipAddress = req.ip || req.connection.remoteAddress;
+    await LoginHistory.create({
+      username: req.body.username,
+      email: req.body.email,
+      action: "signup",
+      ipAddress,
+      success: false,
+    }).catch(err => console.error("Failed to log signup:", err));
+    
     res.status(400).json({ error: error.message });
   }
 });
@@ -41,9 +63,30 @@ app.post("/login", async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({ username }).select('+password');
     if (!user || !(await bcrypt.compare(password, user.password))) {
+      // Save failed login attempt
+      const ipAddress = req.ip || req.connection.remoteAddress;
+      await LoginHistory.create({
+        username,
+        action: "login",
+        ipAddress,
+        success: false,
+      }).catch(err => console.error("Failed to log login:", err));
+      
       return res.status(401).json({ error: "Invalid credentials" });
     }
+    
     const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET || "secretkey", { expiresIn: "1h" });
+    
+    // Save successful login attempt
+    const ipAddress = req.ip || req.connection.remoteAddress;
+    await LoginHistory.create({
+      username,
+      email: user.email,
+      action: "login",
+      ipAddress,
+      success: true,
+    }).catch(err => console.error("Failed to log login:", err));
+    
     res.json({ token, user: { id: user._id, username: user.username, email: user.email } });
   } catch (error) {
     res.status(500).json({ error: "Login failed" });
@@ -249,6 +292,30 @@ app.post("/newOrder", verifyToken, async (req, res) => {
   newOrder.save();
 
   res.send("Order saved!");
+});
+
+// Get login history for current user
+app.get("/loginHistory", verifyToken, async (req, res) => {
+  try {
+    const history = await LoginHistory.find({ username: req.user.username })
+      .sort({ timestamp: -1 })
+      .limit(50);
+    res.json(history);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch login history" });
+  }
+});
+
+// Admin endpoint: Get all login/signup activity
+app.get("/allActivity", async (req, res) => {
+  try {
+    const activity = await LoginHistory.find()
+      .sort({ timestamp: -1 })
+      .limit(100);
+    res.json(activity);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch activity" });
+  }
 });
 
 
