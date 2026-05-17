@@ -7,8 +7,9 @@ const Holdings = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
+    const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3002';
     if (token) {
-      axios.get("http://localhost:3002/allHoldings", {
+      axios.get(`${backendUrl}/allHoldings`, {
         headers: { Authorization: `Bearer ${token}` }
       }).then((res) => {
         // console.log(res.data);

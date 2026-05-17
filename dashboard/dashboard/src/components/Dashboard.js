@@ -30,7 +30,8 @@ const Dashboard = () => {
 
     const token = localStorage.getItem('token');
     if (!token) {
-      const loginUrl = process.env.REACT_APP_LANDING_URL ? `${process.env.REACT_APP_LANDING_URL}/login` : 'http://localhost:3004/login';
+      const landingUrl = process.env.REACT_APP_LANDING_URL || 'http://localhost:3004';
+      const loginUrl = `${landingUrl}/login`;
       window.location.replace(loginUrl);
       return;
     }
