@@ -26,45 +26,45 @@ function Footer() {
             </div>
             <div className='col mb-5'>
                 <p>Company</p>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>About</a>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>Products</a>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>Pricing</a>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>Referal programme</a>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>Careers</a>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>Zerodha.tech</a>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>Press & media</a>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>Zeridha cares (CSR)</a>
+                <a href='/about' style={{textDecoration:"none", marginRight:"1px"}}>About</a>
+                <a href='/product' style={{textDecoration:"none", marginRight:"1px"}}>Products</a>
+                <a href='/pricing' style={{textDecoration:"none", marginRight:"1px"}}>Pricing</a>
+                <a href='/signup' style={{textDecoration:"none", marginRight:"1px"}}>Referal programme</a>
+                <a href='/about' style={{textDecoration:"none", marginRight:"1px"}}>Careers</a>
+                <a href='/product' style={{textDecoration:"none", marginRight:"1px"}}>Zerodha.tech</a>
+                <a href='/about' style={{textDecoration:"none", marginRight:"1px"}}>Press & media</a>
+                <a href='/about' style={{textDecoration:"none", marginRight:"1px"}}>Zeridha cares (CSR)</a>
             </div>
             <div className='col'>
                 <p>Support</p>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>Contact us</a>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>Support portal</a>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>How to file a complaint</a>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>Status of your complaints</a>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>Bulletin</a>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>Circular</a>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>Z-Connect blog</a>
+                <a href='/support' style={{textDecoration:"none", marginRight:"1px"}}>Contact us</a>
+                <a href='/support' style={{textDecoration:"none", marginRight:"1px"}}>Support portal</a>
+                <a href='/support' style={{textDecoration:"none", marginRight:"1px"}}>How to file a complaint</a>
+                <a href='/support' style={{textDecoration:"none", marginRight:"1px"}}>Status of your complaints</a>
+                <a href='/support' style={{textDecoration:"none", marginRight:"1px"}}>Bulletin</a>
+                <a href='/support' style={{textDecoration:"none", marginRight:"1px"}}>Circular</a>
+                <a href='/support' style={{textDecoration:"none", marginRight:"1px"}}>Z-Connect blog</a>
             </div>
             <div className='col'>
                 <p>Account</p>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>Open demat account</a>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>Minor demat account</a>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>NRI demat account</a>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>Commodity</a>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>Dematerialisation</a>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>Fund transfer</a>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>MTF transfer</a>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>Referral program</a>
+                <a href='/signup' style={{textDecoration:"none", marginRight:"1px"}}>Open demat account</a>
+                <a href='/signup' style={{textDecoration:"none", marginRight:"1px"}}>Minor demat account</a>
+                <a href='/signup' style={{textDecoration:"none", marginRight:"1px"}}>NRI demat account</a>
+                <a href='/product' style={{textDecoration:"none", marginRight:"1px"}}>Commodity</a>
+                <a href='/support' style={{textDecoration:"none", marginRight:"1px"}}>Dematerialisation</a>
+                <a href='/support' style={{textDecoration:"none", marginRight:"1px"}}>Fund transfer</a>
+                <a href='/support' style={{textDecoration:"none", marginRight:"1px"}}>MTF transfer</a>
+                <a href='/signup' style={{textDecoration:"none", marginRight:"1px"}}>Referral program</a>
             </div>
             <div className='col'>
                 <p>Quick links</p>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>Upcoming IPOs</a>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>Brokerage charges</a>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>Market holidays</a>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>Economic calendor</a>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>Calculators</a>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>Markets</a>
-                <a href='' style={{textDecoration:"none", marginRight:"1px"}}>Sectors</a>
+                <a href='/product' style={{textDecoration:"none", marginRight:"1px"}}>Upcoming IPOs</a>
+                <a href='/pricing' style={{textDecoration:"none", marginRight:"1px"}}>Brokerage charges</a>
+                <a href='/about' style={{textDecoration:"none", marginRight:"1px"}}>Market holidays</a>
+                <a href='/about' style={{textDecoration:"none", marginRight:"1px"}}>Economic calendor</a>
+                <a href='/pricing' style={{textDecoration:"none", marginRight:"1px"}}>Calculators</a>
+                <a href='/product' style={{textDecoration:"none", marginRight:"1px"}}>Markets</a>
+                <a href='/product' style={{textDecoration:"none", marginRight:"1px"}}>Sectors</a>
             </div>
         </div>
         <div className='mt-5 text-muted' style={{fontSize:"12px", textDecoration:"none"}}>
