@@ -8,10 +8,12 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "test:hash": "node test/hashTest.js"
 },
   "devDependencies": {
-    "nodemon": "^3.1.14"
+    "nodemon": "^3.1.14",
+    "mongodb-memory-server": "^8.13.0"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
