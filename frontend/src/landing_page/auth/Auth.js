@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 import './Auth.css';
 
 function Auth() {
-    const [isLogin, setIsLogin] = useState(true);
+    const location = useLocation();
+    const [isLogin, setIsLogin] = useState(location.pathname === '/login');
     const [formData, setFormData] = useState({
         username: '',
         email: '',
@@ -13,6 +15,10 @@ function Auth() {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        setIsLogin(location.pathname === '/login');
+    }, [location.pathname]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -57,18 +63,21 @@ function Auth() {
         setLoading(true);
         try {
             const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3002';
+            console.log('Auth Request:', { isLogin, backendUrl, username: formData.username });
             if (isLogin) {
                 // Login
                 const response = await axios.post(`${backendUrl}/login`, {
                     username: formData.username,
                     password: formData.password
                 });
+                console.log('Login Success:', response.data);
                 const token = response.data.token;
                 // keep token/user in landing origin as well
                 localStorage.setItem('token', token);
                 localStorage.setItem('user', JSON.stringify(response.data.user));
                 // redirect to dashboard and pass token via URL so dashboard (different origin/port) can store it
                 const dashboardUrl = process.env.REACT_APP_DASHBOARD_URL || 'http://localhost:3000';
+                console.log('Redirecting to:', `${dashboardUrl}?token=${token}`);
                 window.location.replace(`${dashboardUrl}?token=${token}`);
             } else {
                 // Signup
@@ -77,6 +86,7 @@ function Auth() {
                     email: formData.email,
                     password: formData.password
                 });
+                console.log('Signup Success');
                 setSuccess('Account created successfully! Switching to login...');
                 setIsLogin(true);
                 setFormData({
@@ -87,6 +97,7 @@ function Auth() {
                 });
             }
         } catch (err) {
+            console.error('Auth Error:', err.response?.data || err.message);
             setError(err.response?.data?.error || (isLogin ? 'Login failed' : 'Registration failed'));
         } finally {
             setLoading(false);
@@ -94,7 +105,8 @@ function Auth() {
     };
 
     const toggleMode = () => {
-        setIsLogin(!isLogin);
+        const newPath = isLogin ? '/signup' : '/login';
+        window.location.pathname = newPath;
         setFormData({
             username: '',
             email: '',
