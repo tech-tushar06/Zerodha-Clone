@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
@@ -17,23 +17,33 @@ import Footer from "./Footer";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+function AppRouter() {
+  const location = useLocation();
+  const hideLayout = location.pathname === '/login' || location.pathname === '/signup';
+
+  return (
+    <>
+      {!hideLayout && <Navbar />}
+      <Routes>
+        <Route path='/' element={<HomePage/>}></Route>
+        <Route path='/signup' element={<Auth/>}></Route>
+        <Route path='/login' element={<Auth/>}></Route>
+        <Route path='/about' element={<AboutPage/>}></Route>
+        <Route path='/product' element={<ProductPage/>}></Route>
+        <Route path='/pricing' element={<PricingPage/>}></Route>
+        <Route path='/support' element={<SupportPage/>}></Route>
+        <Route path="*" element={<NotFound/>}></Route>
+      </Routes>
+      {!hideLayout && <Footer />}
+    </>
+  );
+}
+
 root.render(
   <BrowserRouter>
-  <Navbar/>
-  <Routes>
-    <Route path='/' element={<HomePage/>}></Route>
-    <Route path='/signup' element={<Auth/>}></Route>
-    <Route path='/login' element={<Auth/>}></Route>
-    <Route path='/about' element={<AboutPage/>}></Route>
-    <Route path='/product' element={<ProductPage/>}></Route>
-    <Route path='/pricing' element={<PricingPage/>}></Route>
-    <Route path='/support' element={<SupportPage/>}></Route>
-    <Route path="*" element={<NotFound/>}></Route>
-  </Routes>
-  <Footer/>
+    <AppRouter />
   </BrowserRouter>
- 
 );
-export default reportWebVitals();
+reportWebVitals();
 
 
