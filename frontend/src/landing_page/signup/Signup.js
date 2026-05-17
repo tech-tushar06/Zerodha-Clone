@@ -21,7 +21,8 @@ function Signup() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:3002/register', formData);
+            const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3002';
+            await axios.post(`${backendUrl}/register`, formData);
             navigate('/login'); // Assuming there's a login page
         } catch (error) {
             setError(error.response?.data?.error || 'Registration failed');

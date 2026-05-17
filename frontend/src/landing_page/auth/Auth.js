@@ -56,9 +56,10 @@ function Auth() {
 
         setLoading(true);
         try {
+            const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3002';
             if (isLogin) {
                 // Login
-                const response = await axios.post('http://localhost:3002/login', {
+                const response = await axios.post(`${backendUrl}/login`, {
                     username: formData.username,
                     password: formData.password
                 });
@@ -71,7 +72,7 @@ function Auth() {
                 window.location.replace(`${dashboardUrl}?token=${token}`);
             } else {
                 // Signup
-                await axios.post('http://localhost:3002/register', {
+                await axios.post(`${backendUrl}/register`, {
                     username: formData.username,
                     email: formData.email,
                     password: formData.password

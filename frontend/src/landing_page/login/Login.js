@@ -20,11 +20,13 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3002/login', formData);
+            const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3002';
+            const response = await axios.post(`${backendUrl}/login`, formData);
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('user', JSON.stringify(response.data.user));
             // Redirect to dashboard (assuming it's on port 3001)
-            window.location.href = 'http://localhost:3001';
+            const dashboardUrl = process.env.REACT_APP_DASHBOARD_URL || 'http://localhost:3000';
+            window.location.href = dashboardUrl;
         } catch (error) {
             setError(error.response?.data?.error || 'Login failed');
         }
