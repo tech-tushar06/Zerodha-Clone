@@ -1,23 +1,17 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios, { all } from "axios";
 import { VerticalGraph } from "./VerticalGraph";
+
+// import { holdings } from "../data/data";
 
 const Holdings = () => {
   const [allHoldings, setAllHoldings] = useState([]);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3002';
-    if (token) {
-      axios.get(`${backendUrl}/allHoldings`, {
-        headers: { Authorization: `Bearer ${token}` }
-      }).then((res) => {
-        // console.log(res.data);
-        setAllHoldings(res.data);
-      }).catch((error) => {
-        console.error('Error fetching holdings:', error);
-      });
-    }
+    axios.get("http://localhost:3002/allHoldings").then((res) => {
+      // console.log(res.data);
+      setAllHoldings(res.data);
+    });
   }, []);
 
   // const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];

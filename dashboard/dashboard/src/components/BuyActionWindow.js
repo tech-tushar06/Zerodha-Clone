@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import axios from "axios";
@@ -11,25 +11,19 @@ const BuyActionWindow = ({ uid }) => {
   const [stockQuantity, setStockQuantity] = useState(1);
   const [stockPrice, setStockPrice] = useState(0.0);
 
-  const { closeBuyWindow } = useContext(GeneralContext);
-
   const handleBuyClick = () => {
-    const token = localStorage.getItem('token');
-    const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3002';
-    axios.post(`${backendUrl}/newOrder`, {
+    axios.post("http://localhost:3002/newOrder", {
       name: uid,
       qty: stockQuantity,
       price: stockPrice,
       mode: "BUY",
-    }, {
-      headers: { Authorization: `Bearer ${token}` }
     });
 
-    closeBuyWindow();
+    GeneralContext.closeBuyWindow();
   };
 
   const handleCancelClick = () => {
-    closeBuyWindow();
+    GeneralContext.closeBuyWindow();
   };
 
   return (
