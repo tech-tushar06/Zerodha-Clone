@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios, { all } from "axios";
+import apiClient from "../apiClient";
 import { VerticalGraph } from "./VerticalGraph";
 
 // import { holdings } from "../data/data";
@@ -8,10 +8,16 @@ const Holdings = () => {
   const [allHoldings, setAllHoldings] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3002/allHoldings").then((res) => {
-      // console.log(res.data);
-      setAllHoldings(res.data);
-    });
+    const loadHoldings = async () => {
+      try {
+        const res = await apiClient.get("/allHoldings");
+        setAllHoldings(res.data);
+      } catch (error) {
+        console.error("Failed to load holdings:", error);
+      }
+    };
+
+    loadHoldings();
   }, []);
 
   // const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
